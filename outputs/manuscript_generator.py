@@ -608,8 +608,13 @@ def build():
     # ── DATA AVAILABILITY ────────────────────────────────────────────────────
     _heading(doc, "DATA AVAILABILITY")
     _para(doc,
-        "The DenPAR dataset is publicly available at https://zenodo.org/record/16645076. "
-        "Model code and training scripts are available in the OpenGeoTrust-PerioSAM repository.",
+        "The DenPAR dataset used in this study is publicly available on Zenodo "
+        "(DOI: 10.5281/zenodo.16645076; CC-BY 4.0 licence). All model code, training scripts, "
+        "evaluation pipelines, and publication figures are openly available in the "
+        "OpenGeoTrust-PerioSAM repository at https://github.com/Pkr2180/opengeotrust-periosam-denpar. "
+        "Trained model checkpoints are reproducible by running the provided Modal GPU pipeline "
+        "against the DenPAR dataset; raw checkpoint files are not deposited owing to file-size "
+        "constraints but will be shared upon reasonable request to the corresponding author.",
         sa=4)
 
     # ── CONFLICT OF INTEREST ─────────────────────────────────────────────────
