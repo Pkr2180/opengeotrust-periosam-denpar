@@ -1,0 +1,62 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+.venv/
+venv/
+env/
+*.egg-info/
+dist/
+build/
+
+# Data — download DenPAR from https://zenodo.org/record/16645076
+data/raw/
+data/processed/
+data/cache/
+data/splits/
+
+# Model checkpoints (large .pt files — stored in Modal cloud volume)
+outputs/checkpoints/
+outputs/predictions/
+outputs/logs/
+
+# Metrics — keep only final benchmark results
+outputs/metrics/*
+!outputs/metrics/.gitkeep
+!outputs/metrics/eval_results_final.json
+!outputs/metrics/multitask_history_final.json
+
+# Duplicate nested subdirectories created during development
+outputs/figures/figures/
+outputs/metrics/metrics/
+
+# Temporary debug scripts
+outputs/check_bone.py
+
+# Notebooks checkpoints
+notebooks/.ipynb_checkpoints/
+
+# IDE
+.vscode/settings.json
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Office / Word temp files
+~$*.docx
+~WRL*.tmp
+*.tmp
+
+# Modal
+.modal/
+
+# Secrets
+*.env
+.env.local
+secrets.yaml

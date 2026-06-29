@@ -1,0 +1,4 @@
+"Config","Description","Bone Val Dice","Bone Test Dice","Tooth Test Dice"
+"A: Baseline","thickness=3px, Dice+Focal, broken GT","0.350","N/A","N/A"
+"B: Single-task","thickness=7px, Tversky+Focal, correct GT","0.597","0.421","N/A"
+"C: Multitask (ours)","thickness=7px, Tversky+Focal, bone_w=2.0","0.578","0.544","0.957"

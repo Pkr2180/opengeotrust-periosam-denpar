@@ -1,0 +1,41 @@
+# Core deep learning
+torch>=2.1.0
+torchvision>=0.16.0
+
+# Segmentation models
+segmentation-models-pytorch>=0.3.3
+
+# Image processing
+albumentations>=1.3.1
+opencv-python>=4.8.0
+Pillow>=10.0.0
+
+# Scientific computing
+numpy>=1.24.0
+scipy>=1.11.0
+pandas>=2.0.0
+scikit-learn>=1.3.0
+scikit-image>=0.21.0
+
+# Visualization
+matplotlib>=3.7.0
+seaborn>=0.12.0
+
+# Utilities
+tqdm>=4.65.0
+PyYAML>=6.0
+rich>=13.0.0
+loguru>=0.7.0
+
+# Experiment tracking (optional, lightweight)
+# tensorboard>=2.13.0
+
+# Modal for cloud GPU
+modal>=0.55.0
+
+# Notebook support
+jupyter>=1.0.0
+ipykernel>=6.25.0
+
+# Data format
+pycocotools>=2.0.7

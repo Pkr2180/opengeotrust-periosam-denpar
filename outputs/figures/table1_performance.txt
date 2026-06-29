@@ -1,0 +1,31 @@
+Table 1 — OpenGeoTrust-PerioSAM  Test Set Performance (DenPAR, n=200)
+==============================================================
+Task                           Metric                  Value
+--------------------------------------------------------------
+Tooth Segmentation             Dice (DSC)             0.9569
+                               IoU (Jaccard)          0.9186
+                               Precision              0.9639
+                               Recall                 0.9516
+                               HD95 (px)                6.05
+                               MSD (px)               0.7301
+Bone Line Segmentation         Dice (DSC)             0.5438
+                               IoU (Jaccard)          0.3944
+                               Precision              0.5595
+                               Recall                 0.5570
+                               HD95 (px)               73.12
+                               MSD (px)              12.4452
+Landmark Detection             MRE (px)               1.0489
+                               NME                  0.001449
+                               PCK@2px                0.9475
+                               PCK@4px                1.0000
+Uncertainty (MC-Dropout)       ECE                    0.0936
+                               Brier Score          0.008942
+                               Spearman ρ             0.5906
+                               p-value (ρ)          < 0.0001
+==============================================================
+
+Notes:
+  - MCDropout: T=20 stochastic forward passes
+  - ECE < 0.10 indicates well-calibrated uncertainty
+  - Bone Dice=0.544 on thin crestal lines (<5% px positive)
+  - Spearman ρ=0.59 (p<0.0001): uncertainty predictive of error

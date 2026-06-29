@@ -1,0 +1,110 @@
+project:
+  name: OpenGeoTrust-PerioSAM
+  seed: 42
+  version: "0.1.0"
+
+dataset:
+  name: DenPAR
+  zenodo_doi: "10.5281/zenodo.16645076"
+  data_root: "data/raw/DenPAR"
+  processed_root: "data/processed"
+  splits_root: "data/splits"
+  splits:
+    - Training
+    - Validation
+    - Testing
+  subfolders:
+    images: "Images"
+    masks_radiograph: "Masks (Radiograph-wise)"
+    masks_tooth: "Masks (Tooth-wise)"
+    bone_level: "Bone Level Annotations"
+    keypoints: "Key Points Annotations"
+  image_extensions: [".png", ".jpg", ".jpeg", ".tif", ".tiff"]
+  annotation_extensions: [".json"]
+
+preprocessing:
+  img_size: 512
+  bone_line_thickness: 3
+  keypoint_sigma: 8          # Gaussian sigma for heatmap generation (pixels at 512)
+  normalize_mean: [0.485, 0.456, 0.406]   # ImageNet for RGB mode
+  normalize_std: [0.229, 0.224, 0.225]
+  grayscale_mean: 0.5
+  grayscale_std: 0.5
+
+model:
+  encoder: "resnet34"        # resnet34 | efficientnet-b0 | vgg16
+  encoder_weights: "imagenet"
+  decoder: "unet"
+  in_channels: 1             # grayscale IOPA
+  num_tooth_classes: 2       # background + tooth region
+  num_bone_classes: 2        # background + bone line
+  num_keypoint_types: 2      # CEJ, apex
+  dropout_rate: 0.3
+  mc_dropout_samples: 20
+
+training:
+  max_samples: null          # null = full dataset
+  epochs: 50
+  img_size: 512
+  batch_size: 4
+  num_workers: 4
+  learning_rate: 1.0e-4
+  weight_decay: 1.0e-4
+  lr_scheduler: "cosine"
+  warmup_epochs: 5
+  mixed_precision: true      # only applied when device=cuda
+  device: "cuda"
+  gradient_clip: 1.0
+  save_every_epoch: true
+  resume_checkpoint: null
+
+loss:
+  tooth_seg:
+    dice_weight: 0.5
+    bce_weight: 0.5
+  bone_line:
+    dice_weight: 0.4
+    focal_weight: 0.4
+    geometry_weight: 0.2
+  keypoint:
+    mse_weight: 0.7
+    focal_weight: 0.3
+  geometry:
+    continuity_weight: 0.3
+    collinearity_weight: 0.3
+    proximity_weight: 0.2
+    boundary_weight: 0.1
+    smoothness_weight: 0.1
+  calibration:
+    temperature: 1.0         # learned via temperature scaling
+
+weak_label:
+  modes:
+    - full_masks
+    - bbox_only
+    - points_only
+    - scribble_only
+    - mixed
+
+evaluation:
+  metrics:
+    segmentation: [dice, iou, precision, recall]
+    keypoints: [mre, nme, pck_2, pck_4, pck_8]
+    bone_loss: [mae, rmse, correlation]
+    uncertainty: [ece, brier, spearman_auroc]
+  pck_thresholds: [2, 4, 8]  # pixels
+  hausdorff_percentile: 95
+
+outputs:
+  checkpoint_dir: "outputs/checkpoints"
+  log_dir: "outputs/logs"
+  prediction_dir: "outputs/predictions"
+  metrics_dir: "outputs/metrics"
+  figure_dir: "outputs/figures"
+  figure_dpi: 300
+  figure_format: "pdf"
+
+uncertainty:
+  mc_dropout_samples: 20
+  entropy_threshold: 0.5     # flag for clinician review
+  variance_threshold: 0.1

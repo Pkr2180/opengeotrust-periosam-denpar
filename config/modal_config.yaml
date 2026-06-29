@@ -1,0 +1,33 @@
+modal:
+  app_name: opengeotrust-periosam
+  volume_name: denpar-opengeotrust
+  volume_mount: /data
+  timeout_seconds: 21600     # 6 hours
+  gpu: "T4"                  # T4 first; upgrade to L4/A10 if needed
+  memory_gb: 16
+  cpu: 4
+
+dataset:
+  remote_path: /data/DenPAR
+  zenodo_doi: "10.5281/zenodo.16645076"
+  check_before_download: true
+
+training:
+  max_samples: 100           # safe default; add --full to use all 1000
+  epochs: 50
+  img_size: 512
+  batch_size: 4
+  num_workers: 4
+  device: "cuda"
+  resume: true               # always attempt checkpoint resume
+
+checkpoints:
+  save_dir: /data/checkpoints
+  upload_metrics: true
+  upload_figures: true
+  save_every_epoch: true
+
+outputs:
+  remote_metrics_dir: /data/outputs/metrics
+  remote_figures_dir: /data/outputs/figures
+  local_sync_dir: outputs/
