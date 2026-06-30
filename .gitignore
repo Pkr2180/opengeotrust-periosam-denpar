@@ -32,6 +32,10 @@ outputs/metrics/*
 outputs/figures/figures/
 outputs/metrics/metrics/
 
+# K-fold CV — fold data and checkpoints live in Modal volume, not repo
+outputs/kfold/fold_*/
+!outputs/kfold/kfold_summary.json
+
 # Temporary debug scripts
 outputs/check_bone.py
 
