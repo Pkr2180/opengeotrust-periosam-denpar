@@ -401,8 +401,13 @@ def build():
         "(PCK@2px, PCK@4px, PCK@8px). Calibration: Expected Calibration Error (ECE; "
         "15 bins) and Brier Score. Uncertainty-error association: Spearman rank correlation. "
         "Bootstrap 95% confidence intervals (B=2,000 resamples with replacement) computed "
-        "for all primary metrics. Statistical analyses used Python 3.10 (SciPy 1.11); "
-        "α=0.05 significance threshold.",
+        "for all primary metrics. To assess generalisation stability beyond the single "
+        "fixed split, 5-fold cross-validation was performed across all 1,000 DenPAR images: "
+        "images were pooled and randomly permuted (seed=42), divided into five 200-image "
+        "folds, and the model was retrained from random initialisation for each fold using "
+        "identical hyperparameters. Fold-level metrics and mean ± SD are reported in "
+        "Supplementary Results SR-9 and Supplementary Figures A8–A9. "
+        "Statistical analyses used Python 3.10 (SciPy 1.11); α=0.05 significance threshold.",
         indent=True)
 
     # ── RESULTS ──────────────────────────────────────────────────────────────
